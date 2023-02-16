@@ -4,7 +4,6 @@
 @section('content')
     <section id="container">
         <div class="wrap-container">
-            <!-----------------Content-Box-------------------->
             <div id="main-content">
                 <div class="wrap-content">
                     <div class="">
@@ -17,7 +16,6 @@
                                                 <div class="col">
                                                     <div class="card shadow-sm">
                                                         <img src="{{asset('storage/images/blog.jpg') }}" alt="blog" class="bd-placeholder-img card-img-top" width="100%" height="400">
-
                                                         <div class="card-body">
                                                             @foreach($post as $element)
                                                                 <div class="row-3" id="title">

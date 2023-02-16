@@ -15,33 +15,43 @@ class CommentsController extends Controller
      *
      */
 
-    public function save(Request $request)
+    public function index()
     {
-        $valid = $request->validate([
+        $comment = Comments::find(2);
+        dd($comment);
+        return view('article', compact('comment'));
+    }
+
+
+    public function show()
+    {
+
+
+    }
+
+    public function create(Request $request)
+    {
+        $request->validate([
             'comments' => 'required|min:4|max:40',
             'date' => 'required|min:15|max:500',
         ]);
 
-
+        $comment = new Comments();
         if ($request->ajax()) {
-            $comment = new Comments();
-            $id = $request->input('id');
+            $comment = $request->input('id');
             $comment = $request->input('comments');
-            $date = $request->input('date');
-            $res = array("comment" => $comment, "date" => $date);
-            DB::table('comments')->insert($res);
-
+            $comment = $request->input('date');
+            $comment->save();
             return "True request-2";
         }
-        return response()->redirectTo('/');
-
-//        return view('article', ['post' => $comment]);
-
+        //return response()->redirectTo('/');
+        return view('article', ['post' => $comment]);
     }
 
 
-
-
+    public function store()
+    {
+    }
 
 
 }

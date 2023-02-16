@@ -20,7 +20,10 @@ Route::post('/news/save', "App\Http\Controllers\NewsController@create");
 Route::get('/article', "App\Http\Controllers\NewsController@article")->name('post');
 Route::post('/news/update/{id}', "App\Http\Controllers\NewsController@update");
 Route::get('/news/delete', "App\Http\Controllers\NewsController@destroy");
-Route::post('/news/comment', "App\Http\Controllers\CommentsController@save");
+Route::post('/news/comment', "App\Http\Controllers\CommentsController@create");
+
+Route::get('/news/index', "App\Http\Controllers\CommentsController@index");
+
 Route::get('/search', "App\Http\Controllers\NewsController@search")->name('search');
 Route::get('/test', "App\Http\Controllers\NewsController@runTemplate");
 
