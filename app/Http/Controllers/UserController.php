@@ -22,11 +22,6 @@ class UserController extends Controller
         return view('admin', ['list' => $list->all()]);
     }
 
-    public function store()
-    {
-
-    }
-
     public function create(Request $request)
     {
         $request->validate([
@@ -66,22 +61,20 @@ class UserController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        $update = DB::update('update users set name = ?,
+        DB::update('update users set name = ?,
         email=?,password=? where id = ?', [$name, $email, $password, $id]);
 
         return response()->redirectTo('/room');
 
     }
 
-
     public function destroy(Request $request)
     {
-
         $id = $request->input('id');
         $delete = User::find($id);
         $delete->delete();
+
         return response()->redirectTo('/room');
     }
-
 
 }

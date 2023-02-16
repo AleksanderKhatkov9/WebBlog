@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comments;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +21,7 @@ class NewsController extends Controller
 
     public function index()
     {
-        $post = News::paginate(2);
+        $post = News::paginate(20);
         return view('home', ['post' => $post]);
     }
 
@@ -33,7 +32,7 @@ class NewsController extends Controller
 
     public function create(Request $request)
     {
-        $valid = $request->validate([
+        $request->validate([
             'title' => 'required|min:4|max:500',
             'description' => 'required|min:15|max:500'
         ]);
@@ -73,7 +72,7 @@ class NewsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'title' => 'required|min:4|max:500',
             'description' => 'required|min:15|max:500',
             'content' => 'required|min:15|max:1000',
@@ -97,48 +96,24 @@ class NewsController extends Controller
     public function destroy(Request $request)
     {
         if ($request->ajax()) {
-            $id = $request->input('id');
+            $id = $_GET['id'];
+//            $id = $request->input('id');
             DB::delete('delete from news where id =:id', ['id' => $id]);
             return "True request!";
         }
         return response()->redirectTo('/');
     }
 
-
-//    public function save(Request $request)
-//    {
-//
-//        if ($request->ajax()) {
-//
-//            $id = $request->input('id');
-//            $comment = $request->input('comments');
-//            $date = $request->input('date');
-//            $res = array("comment" => $comment, "date" => $date);
-//            DB::table('comments')->insert($res);
-//
-//            return "True request-2";
-//        }
-//
-//        return response()->redirectTo('/');
-//    }
-
-
     public function search(Request $request)
     {
         $val = $request->val;
-//        $post = News::where('title', 'LIKE', "%{$val}%")->orderBy('title')->get();
         $post = News::where('title', 'LIKE', "%{$val}%")->orderBy('title')->get();
-
-//        dd($post);
-
         return view('home', compact('post', $post));
-
-
     }
 
     public function start()
     {
-        return view('admin');
+        return view('show');
     }
 
     public function runTemplate()
