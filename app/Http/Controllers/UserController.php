@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,8 +14,8 @@ class UserController extends Controller
      * @todo I need write crud for users table
      * The first I creat function index when return list users in View withe name admin
      * The second I creat function create when to get param with form and admin page aтв return param request in function
+     * add new fiche hash password
      */
-
 
     public function index()
     {
@@ -33,7 +34,8 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = $request->input('password');
+        $password = $request->input('password');
+        $user ->password = Hash::make($password);
         $user->save();
         return view('admin', ['list' => $user->all()]);
     }
@@ -55,17 +57,14 @@ class UserController extends Controller
             'email' => 'required|regex:/(.+)@(.+)\.(.+)/i',
             'password' => 'required|min:4|max:20',
         ]);
-
         $id = $request->input('id');
         $name = $request->input('name');
         $email = $request->input('email');
-        $password = $request->input('password');
-
+        $password = Hash::make($request->input('password'));
         DB::update('update users set name = ?,
         email=?,password=? where id = ?', [$name, $email, $password, $id]);
 
         return response()->redirectTo('/room');
-
     }
 
     public function destroy(Request $request)
@@ -73,7 +72,6 @@ class UserController extends Controller
         $id = $request->input('id');
         $delete = User::find($id);
         $delete->delete();
-
         return response()->redirectTo('/room');
     }
 

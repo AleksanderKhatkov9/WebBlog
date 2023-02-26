@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->text('comment');
             $table->string('date',45);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
