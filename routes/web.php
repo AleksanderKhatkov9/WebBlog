@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 /** Router News */
-Route::get('/', "App\Http\Controllers\NewsController@index");
+//Route::get('/', "App\Http\Controllers\NewsController@index");
 Route::get('/add', "App\Http\Controllers\NewsController@store");
 Route::post('/news/save', "App\Http\Controllers\NewsController@create");
 Route::get('/article', "App\Http\Controllers\NewsController@article")->name('post');
@@ -40,20 +40,20 @@ Route::get('/admin', "App\Http\Controllers\AdminController@index");
 
 /** Rote autorization  */
 
-
-//Route::get('/', "App\Http\Controllers\HomeController@index");
+Auth::routes();
+Route::get('/', "App\Http\Controllers\HomeController@index");
 
 // маршруты аутентификации
-//Route::get('auth/login', 'Auth\AuthController@getLogin');
-//Route::post('auth/login', 'Auth\AuthController@postLogin');
-//Route::get('auth/logout', 'Auth\AuthController@getLogout');
-//
-//// маршруты регистрации
-//Route::get('auth/register', 'Auth\AuthController@getRegister');
-//Route::post('auth/register', 'Auth\AuthController@postRegister');
+Route::get('/login', 'Auth\AuthController@getLogin');
+Route::post('/login', 'Auth\AuthController@postLogin');
+Route::get('/logout', 'Auth\AuthController@getLogout');
+
+// маршруты регистрации
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
 
 
-//Auth::routes();
+
 
