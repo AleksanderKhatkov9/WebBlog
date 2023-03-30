@@ -86,11 +86,10 @@ class NewsController extends Controller
         $description = $request->input('description');
         $content = $request->input('content');
         $date = $request->input('date');
-        $article = DB::update('update news set file = ?,
+        DB::update('update news set file = ?,
         title=?,description=?,content=?, date=? where id = ?', [$file, $title, $description, $content, $date, $id]);
 
         return response()->redirectTo('/');
-
     }
 
     public function destroy(Request $request)

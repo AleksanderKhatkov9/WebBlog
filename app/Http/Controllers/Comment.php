@@ -14,7 +14,6 @@ class Comment extends Controller
         $post = new News();
 //        $post = News::all();
 //        dd($post);
-
         return view('home', ['post'=>$post->all()]);
     }
 
@@ -22,7 +21,6 @@ class Comment extends Controller
     {
         return view('about');
     }
-
 
     public function review()
     {
@@ -32,7 +30,7 @@ class Comment extends Controller
 
     public function review_check(Request $request)
     {
-        $valid = $request->validate([
+        $request->validate([
             'email' => 'required|min:4|max:100|email',
             'subject' => 'required|min:4|max:100',
             'message' => 'required|min:15|max:500',

@@ -26,7 +26,6 @@ class CommentsController extends Controller
     public function show()
     {
 
-
     }
 
     public function create(Request $request)

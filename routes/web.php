@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,25 @@ Route::post('/users/save', "App\Http\Controllers\UserController@create");
 Route::get('/edit', "App\Http\Controllers\UserController@edit");
 Route::post('/users/update', "App\Http\Controllers\UserController@update");
 Route::post('/users/delete', "App\Http\Controllers\UserController@destroy");
+Route::get('/admin', "App\Http\Controllers\AdminController@index");
 
 
-Route::get('/users/aut', "App\Http\Controllers\LoginController@index");
+/** Rote autorization  */
+
+
+//Route::get('/', "App\Http\Controllers\HomeController@index");
+
+// маршруты аутентификации
+//Route::get('auth/login', 'Auth\AuthController@getLogin');
+//Route::post('auth/login', 'Auth\AuthController@postLogin');
+//Route::get('auth/logout', 'Auth\AuthController@getLogout');
+//
+//// маршруты регистрации
+//Route::get('auth/register', 'Auth\AuthController@getRegister');
+//Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+
+
+
+//Auth::routes();
 
