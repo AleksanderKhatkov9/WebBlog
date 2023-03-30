@@ -20,8 +20,6 @@ return new class extends Migration
             $table->text('description');
             $table->text('content');
             $table->string('date',45);
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 
